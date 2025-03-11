@@ -4,15 +4,25 @@
  * For more information, see https://remix.run/file-conventions/entry.client
  */
 
-import { RemixBrowser } from '@remix-run/react';
-import { startTransition, StrictMode } from 'react';
-import { hydrateRoot } from 'react-dom/client';
+import { RemixBrowser } from "@remix-run/react";
+import { startTransition, StrictMode } from "react";
+import { hydrateRoot } from "react-dom/client";
+import { Honeybadger, HoneybadgerErrorBoundary } from "@honeybadger-io/react";
+
+const config = {
+  apiKey: "hbp_JaeogAzEIKRn5HJkUMpPEljzBracoA1ooE6t",
+  environment: "production",
+};
+
+const honeybadger = Honeybadger.configure(config);
 
 startTransition(() => {
   hydrateRoot(
     document,
     <StrictMode>
-      <RemixBrowser />
+      <HoneybadgerErrorBoundary honeybadger={honeybadger}>
+        <RemixBrowser />
+      </HoneybadgerErrorBoundary>
     </StrictMode>
   );
 });

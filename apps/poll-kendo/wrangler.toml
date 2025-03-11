@@ -1,0 +1,22 @@
+name = "poll-kendo"
+main = "app/root.tsx"
+compatibility_date = "2025-02-07"
+node_compat = true
+
+[[ d1_databases ]]
+binding = "DB"
+database_name = "poll-kendo"
+database_id = "d9635cdb-ec5e-4d70-b529-5baa15867a70"
+migrations_dir = "drizzle/migrations"
+
+[vars]
+DATABASE="DB"
+ADMIN_KEY="9jjd548v5zd7o68o2jv540so"
+HONEYBADGER_API_KEY="hbp_JaeogAzEIKRn5HJkUMpPEljzBracoA1ooE6t"
+HONEYBADGER_ENV="production"
+
+[env.production.vars]
+DATABASE="DB"
+ADMIN_KEY="9jjd548v5zd7o68o2jv540so"
+HONEYBADGER_API_KEY="hbp_JaeogAzEIKRn5HJkUMpPEljzBracoA1ooE6t"
+HONEYBADGER_ENV="dev"

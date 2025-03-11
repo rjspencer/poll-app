@@ -1,11 +1,8 @@
-import {
-  vitePlugin as remix,
-  cloudflareDevProxyVitePlugin as remixCloudflareDevProxy,
-} from "@remix-run/dev";
-import { defineConfig } from "vite";
-import * as path from "node:path";
-import { nxViteTsPaths } from "@nx/vite/plugins/nx-tsconfig-paths.plugin";
-declare module "@remix-run/cloudflare" {
+import { vitePlugin as remix } from '@remix-run/dev';
+import { defineConfig } from 'vite';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+
+declare module '@remix-run/node' {
   interface Future {
     v3_singleFetch: true;
   }
@@ -14,7 +11,6 @@ declare module "@remix-run/cloudflare" {
 export default defineConfig({
   root: __dirname,
   plugins: [
-    remixCloudflareDevProxy(),
     remix({
       future: {
         v3_fetcherPersist: true,

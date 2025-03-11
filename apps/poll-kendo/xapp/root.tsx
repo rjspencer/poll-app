@@ -1,14 +1,17 @@
-import type { LinksFunction } from '@remix-run/cloudflare';
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  useRouteError,
 } from '@remix-run/react';
+import type { MetaFunction, LinksFunction } from '@remix-run/node';
 
-import './tailwind.css';
+export const meta: MetaFunction = () => [
+  {
+    title: 'New Remix App',
+  },
+];
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -35,25 +38,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
-export function ErrorBoundary() {
-  const error = useRouteError();
-  console.error(error);
-  return (
-    <html lang="en">
-      <head>
-        <title>Oh no!</title>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <h1>Oh no!</h1>
-        <p>Something went wrong.</p>
         <Scripts />
       </body>
     </html>
