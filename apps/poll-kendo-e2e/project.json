@@ -1,0 +1,10 @@
+{
+  "name": "poll-kendo-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/poll-kendo-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["poll-kendo"],
+  "// targets": "to see all targets run: nx show project poll-kendo-e2e --web",
+  "targets": {}
+}
