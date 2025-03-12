@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@components-react": ["libs/components-react/src/index.ts"],
+      "@themebuilder-css": ["libs/themebuilder-css/src/lib/css/bitovi.css"],
+      "@themebuilder-scss": ["libs/themebuilder-css/src/lib/scss/index.scss"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

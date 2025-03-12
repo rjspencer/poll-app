@@ -19,6 +19,9 @@
   "include": [],
   "files": [],
   "references": [
+    // {
+    //   "path": "../../libs/components-react"
+    // },
     {
       "path": "./tsconfig.app.json"
     },

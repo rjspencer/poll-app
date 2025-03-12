@@ -10,13 +10,13 @@ import {
   useLoaderData,
   useLocation,
 } from "@remix-run/react";
-import Button from "../components/button";
 import { Dropdown } from "../components/dropdown/Dropdown";
 import { Page } from "../components/page";
 import { PencilIcon } from "../components/pencil.svg";
 import { isAdmin } from "../data/admin.server";
 import { getQuestions } from "../data/questions.server";
 import { createResponse } from "../data/responses.server";
+import { Button } from "@components-react";
 
 export const meta: MetaFunction = () => {
   return [

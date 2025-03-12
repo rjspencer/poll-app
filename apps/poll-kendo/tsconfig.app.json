@@ -32,4 +32,9 @@
     "src/**/*.test.jsx",
     "src/**/*.spec.jsx"
   ]
+  // "references": [
+  //   {
+  //     "path": "../../libs/components-react"
+  //   }
+  // ]
 }

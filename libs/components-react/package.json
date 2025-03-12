@@ -1,0 +1,16 @@
+{
+  "name": "@poll-kendo/components-react",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "dependencies": {
+    "@progress/kendo-react-buttons": "^10.0.0",
+    "@progress/kendo-react-labels": "^10.0.0"
+  }
+}

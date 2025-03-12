@@ -1,8 +1,9 @@
 import { Form, useNavigation } from "@remix-run/react";
 import { FC, useState } from "react";
-import Button from "./button";
 import Input from "./input";
 import { Question } from "../types";
+// import Button from "@components-react";
+import {Button} from "@components-react";
 
 const emptyQuestion: Question = {
   id: "",
