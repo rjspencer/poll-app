@@ -34,6 +34,6 @@ export const Primary = {};
 export const Heading: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText(/Welcome to Dropdown!/gi)).toBeTruthy();
+    expect(canvas.getByLabelText(/Country/gi)).toBeTruthy();
   },
 };

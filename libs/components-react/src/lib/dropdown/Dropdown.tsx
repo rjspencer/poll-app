@@ -1,35 +1,36 @@
-import { useId } from 'react';
+import { ComponentProps, useId } from 'react';
+import { DropDownList } from '@progress/kendo-react-dropdowns';
+import { Label } from '@progress/kendo-react-labels';
+// import '@themebuilder-css';
 
-interface DropdownProps {
+type DropdownProps = ComponentProps<typeof DropDownList> & {
   name: string;
   options: Array<{ label: string; value: string }>;
   label: string;
   placeholder?: string;
-}
+};
 
 export const Dropdown = ({
   name,
   options,
   label,
   placeholder = 'Select an option',
+  ...props
 }: DropdownProps) => {
   const id = useId();
 
   return (
     <fieldset className="flex flex-col gap-2">
-      <label htmlFor={id}>{label}</label>
-      <select
+      <Label editorId={id}>{label}</Label>
+      <DropDownList
+        {...props}
         id={id}
         name={name}
-        className="w-full p-2 border border-gray-300 rounded-md"
-      >
-        <option value="">{placeholder}</option>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+        data={options}
+        textField="label"
+        dataItemKey="value"
+        defaultItem={{ label: placeholder, value: '' }}
+      />
     </fieldset>
   );
 };

@@ -1,6 +1,10 @@
 import { ComponentProps, FC, ReactNode, useId } from 'react';
+import { Label } from '@progress/kendo-react-labels';
+import { TextBox } from '@progress/kendo-react-inputs';
+// import '@themebuilder-css';
+import styles from './Input.module.css';
 
-type InputProps = ComponentProps<'input'> & {
+type InputProps = ComponentProps<typeof TextBox> & {
   label: ReactNode;
 };
 
@@ -8,9 +12,9 @@ export const Input: FC<InputProps> = ({ label, ...props }) => {
   const id = useId();
 
   return (
-    <div className="flex flex-col gap-1">
-      <label htmlFor={id}>{label}</label>
-      <input id={id} className="px-3 py-2" {...props} />
+    <div className={styles.container}>
+      <Label editorId={id}>{label}</Label>
+      <TextBox id={id} {...props} />
     </div>
   );
 };

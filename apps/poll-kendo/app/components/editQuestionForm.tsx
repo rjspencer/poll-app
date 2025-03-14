@@ -2,11 +2,11 @@ import { Form, useNavigation } from "@remix-run/react";
 import { FC, useState } from "react";
 import Input from "./input";
 import { Question } from "../types";
-// import Button from "@components-react";
-import {Button} from "@components-react";
+import Button from "../components/button";
+// import {Button} from "@components-react";
 
 const emptyQuestion: Question = {
-  id: "",
+  id: "new",
   text: "",
   options: [],
 };
@@ -23,7 +23,7 @@ export const EditQuestionForm: FC<EditQuestionFormProps> = ({
   const [removedAnswers, setRemovedAnswers] = useState<string[]>([]);
 
   return (
-    <Form method="post" action={`/question/${question.id}`}>
+    <Form method="post" action={`/question/${question.id || "new"}`}>
       {navigation.state === "submitting" && (
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-8 rounded-lg shadow-lg">
@@ -110,7 +110,9 @@ export const EditQuestionForm: FC<EditQuestionFormProps> = ({
         </div>
 
         <div className="my-8">
-          <Button type="submit">{question.id ? "Update" : "Create"}</Button>
+          <Button type="submit">
+            {question.id === "new" ? "Create" : "Update"}
+          </Button>
         </div>
       </div>
     </Form>

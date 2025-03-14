@@ -28,7 +28,7 @@ export const loader = async ({
   }
 
   if (params.id === "new") {
-    return {};
+    return { question: null };
   }
 
   const questionQuery = await getQuestion({ context, id: params.id });
@@ -82,7 +82,7 @@ export default function Admin() {
 
   return (
     <Page title="Admin">
-      <EditQuestionForm question={question} />
+      <EditQuestionForm question={question ?? undefined} />
       {question?.id && <DeleteQuestionForm questionId={question?.id} />}
     </Page>
   );

@@ -21,11 +21,12 @@ export function handleError(
   error: unknown,
   { context }: LoaderFunctionArgs | ActionFunctionArgs
 ) {
-  Honeybadger.configure({
-    apiKey: context.cloudflare.env.HONEYBADGER_API_KEY,
-    environment: "production",
-  });
-  Honeybadger.notify(error instanceof Error ? error : new Error(String(error)));
+  // Honeybadger.configure({
+  //   apiKey: context.cloudflare.env.HONEYBADGER_API_KEY,
+  //   environment: "production",
+  // });
+  // Honeybadger.notify(error instanceof Error ? error : new Error(String(error)));
+  console.error({ test: "rtest", error });
 }
 
 export default async function handleRequest(

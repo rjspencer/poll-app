@@ -4,26 +4,23 @@ import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 
 const meta: Meta<typeof Input> = {
-  component: Input,
+  component: (props) => <Input {...props} style={{ width: '16rem' }} />,
   title: 'Input',
+  args: {
+    label: 'First name:',
+  },
 };
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-export const Primary = {
-  args: {
-    label: '',
-    props: '',
-  },
-};
+export const Primary = {};
 
 export const Heading: Story = {
   args: {
-    label: '',
-    props: '',
+    defaultValue: 'John',
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText(/Welcome to Input!/gi)).toBeTruthy();
+    expect(canvas.getByLabelText(/First name/gi)).toHaveValue('John');
   },
 };
