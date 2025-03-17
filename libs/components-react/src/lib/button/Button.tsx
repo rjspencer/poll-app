@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
 import { Button as KendoButton } from '@progress/kendo-react-buttons';
-// import '@themebuilder-css';
+import '@themebuilder-css';
 
 type ButtonProps = ComponentProps<typeof KendoButton>;
 

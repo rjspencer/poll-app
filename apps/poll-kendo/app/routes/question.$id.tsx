@@ -1,15 +1,17 @@
 import {
   ActionFunctionArgs,
   AppLoadContext,
+  defer,
   redirect,
 } from "@remix-run/cloudflare";
 import { Page } from "../components/page";
 import { EditQuestionForm } from "../components/editQuestionForm";
 import { createOrEditQuestion, getQuestion } from "../data/questions.server";
-import { useLoaderData } from "@remix-run/react";
+import { Await, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { DeleteQuestionForm } from "../components/deleteQuestionForm";
 import { isAdmin } from "../data/admin.server";
+import { Suspense } from "react";
 
 type Params = {
   id: string;
@@ -28,14 +30,14 @@ export const loader = async ({
   }
 
   if (params.id === "new") {
-    return { question: null };
+    return defer({ question: null });
   }
 
-  const questionQuery = await getQuestion({ context, id: params.id });
+  const questionQuery = getQuestion({ context, id: params.id });
 
-  return {
+  return defer({
     question: questionQuery,
-  };
+  });
 };
 
 export async function action({ context, request }: ActionFunctionArgs) {
@@ -82,8 +84,16 @@ export default function Admin() {
 
   return (
     <Page title="Admin">
-      <EditQuestionForm question={question ?? undefined} />
-      {question?.id && <DeleteQuestionForm questionId={question?.id} />}
+      <Suspense>
+        <Await resolve={question}>
+          {(question) => (
+            <>
+              <EditQuestionForm question={question ?? undefined} />
+              {question?.id && <DeleteQuestionForm questionId={question?.id} />}
+            </>
+          )}
+        </Await>
+      </Suspense>
     </Page>
   );
 }

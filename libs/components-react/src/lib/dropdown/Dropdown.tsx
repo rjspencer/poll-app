@@ -1,7 +1,7 @@
-import { ComponentProps, useId } from 'react';
+import { ComponentProps, FC, useId } from 'react';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { Label } from '@progress/kendo-react-labels';
-// import '@themebuilder-css';
+import '@themebuilder-css';
 
 type DropdownProps = ComponentProps<typeof DropDownList> & {
   name: string;
@@ -10,13 +10,13 @@ type DropdownProps = ComponentProps<typeof DropDownList> & {
   placeholder?: string;
 };
 
-export const Dropdown = ({
+export const Dropdown: FC<DropdownProps> = ({
   name,
   options,
   label,
   placeholder = 'Select an option',
   ...props
-}: DropdownProps) => {
+}) => {
   const id = useId();
 
   return (

@@ -1,12 +1,14 @@
 import { AppLoadContext } from "@remix-run/cloudflare";
-import { useLoaderData } from "@remix-run/react";
+import { Await, defer, useLoaderData } from "@remix-run/react";
 import { Page } from "../components/page";
 import { getQuestionResults } from "../data/questions.server";
+import { Chart } from "@components-react";
+import { Suspense } from "react";
 
-export const loader = async ({ context }: { context: AppLoadContext }) => {
-  const responsesQuery = await getQuestionResults({ context });
+export const loader = ({ context }: { context: AppLoadContext }) => {
+  const responses = getQuestionResults({ context });
 
-  return { responses: responsesQuery };
+  return defer({ responses });
 };
 
 export default function Index() {
@@ -14,29 +16,37 @@ export default function Index() {
 
   return (
     <Page title="Results">
-      <div className="flex flex-col gap-4">
-        {responses.map((question) => {
-          return (
-            <div key={question.id}>
-              <h2>{question.text}</h2>
-              <ul>
-                {question.options.map((option) => (
-                  <li key={option.id}>
-                    {option.text} -{" "}
-                    {
-                      question.responses.filter(
-                        (r) =>
-                          r.questionId === question.id &&
-                          r.optionId === option.id
-                      ).length
-                    }
-                  </li>
+      <Suspense fallback={<p>Loading options...</p>}>
+        <Await resolve={responses}>
+          {(responses) => {
+            const chartData = responses.map((question) => ({
+              id: question.id,
+              text: question.text,
+              dataLabels: question.options.map((option) => option.text),
+              data: question.options.map((option) => {
+                return question.responses.filter(
+                  (r) => r.optionId === option.id
+                ).length;
+              }),
+            }));
+
+            return (
+              <div className="flex flex-col gap-4">
+                {chartData.map((question) => (
+                  <Chart
+                    key={question.id}
+                    heading={question.text}
+                    dataLabels={question.dataLabels}
+                    data={question.data}
+                    type="column"
+                    style={{ height: "300px" }}
+                  />
                 ))}
-              </ul>
-            </div>
-          );
-        })}
-      </div>
+              </div>
+            );
+          }}
+        </Await>
+      </Suspense>
     </Page>
   );
 }
